@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PhiliPdB - Pong</title>
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="author" content="Philip de Bruin">
+        <meta name="description" content="This is a website with random stuff and things tried with HTML, Javascript and other languages">
+        <meta name="keywords" content="philip, philipdb, bruin, html, javascript, random">
+        <link rel="stylesheet" type="text/css" href="//www.philipdb.nl/fonts.css">
+        <style type="text/css">
+        	body {
+        		background: #353535;
+        		margin: 0;
+        		overflow: hidden;
+        	}
+			#game {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				margin: auto;
+                cursor: none;
+			}
+            p {
+                font-size: 25px;
+                font-family: "Roboto";
+                position: absolute;
+                bottom: 20px;
+                color: #fff;
+                z-index: 1000
+            }
+            .player1 {
+                left: 30px;
+            }
+            .player2 {
+                right: 30px;
+                text-align: right;
+            }
+        </style>
+        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	</head>
+	<body>
+		<canvas id="game">Your browser does not support the HTML5 canvas tag.</canvas>
+        <p class="player1">Player 1 controls:<br>
+            S and W</p>
+        <p class="player2">Player 2 controls:<br>
+            Up and Down arrows</p>
+        <script type="text/javascript" src="game.js"></script>
+	</body>
+</html>
