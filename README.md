@@ -1,4 +1,4 @@
 pong
 ====
 
-This is mine creation of pong
+This is my creation of pong
