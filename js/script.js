@@ -1,6 +1,6 @@
 // Pong
 // By: Philip de Bruin
-// Last edit: 09/04/2014
+// Last edit: 09/25/2014
 
 // Variables
 var width = window.innerWidth,
@@ -30,7 +30,7 @@ window.onload = function() {
     document.addEventListener("click",function() {
         if (!running) setup();
         if (firstGame) {
-            $('p').fadeOut();
+            for (var i = 0; i < 2; i++) document.getElementsByTagName("p")[i].style.opacity = 0;
             firstGame = false;
         }
     });
