@@ -1,6 +1,6 @@
 // Pong
 // By: Philip de Bruin
-// Last edit: 09/25/2014
+// Last edit: 09/30/2014
 
 // Variables
 var width = window.innerWidth,
@@ -236,20 +236,22 @@ function gameOver(player) { // Player = Player who wins
     ball.vx = 0;
     ball.vy = 0;
 
-    ctx.clearRect(0,0,width,height);
-    if (player == 1) {
-        score1 += 1;
-        ctx.fillStyle = "white";
-        ctx.font = "bold 100px Roboto";
-        ctx.fillText("Player 1 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
-    } else if (player == 2) {
-        score2 += 1;
-        ctx.fillStyle = "white";
-        ctx.font = "bold 100px Roboto";
-        ctx.fillText("Player 2 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
-    }
+    setTimeout(function() {
+        ctx.clearRect(0,0,width,height);
+        if (player == 1) {
+            score1 += 1;
+            ctx.fillStyle = "white";
+            ctx.font = "bold 100px Roboto";
+            ctx.fillText("Player 1 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
+        } else if (player == 2) {
+            score2 += 1;
+            ctx.fillStyle = "white";
+            ctx.font = "bold 100px Roboto";
+            ctx.fillText("Player 2 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
+        }
 
-    ctx.fillStyle = "white";
-    ctx.font = "50px Roboto";
-    ctx.fillText("Click to play again", width * 0.5 - 214.5, height * 0.5 + 6);
+        ctx.fillStyle = "white";
+        ctx.font = "50px Roboto";
+        ctx.fillText("Click to play again", width * 0.5 - 214.5, height * 0.5 + 6);
+    },50);
 };
