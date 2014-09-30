@@ -20,13 +20,24 @@
 				margin: auto;
                 cursor: none;
 			}
+            #game:-webkit-full-screen {background-color: #353535;}
+            #game:-moz-full-screen {background-color: #353535;}
             p {
                 font-size: 25px;
                 font-family: "Roboto";
                 position: absolute;
                 bottom: 20px;
                 color: #fff;
-                z-index: 1000
+                z-index: 1000;
+            }
+            #fullscreen {
+                width: 25px;
+                height: 25px;
+                position: absolute;
+                z-index: 1;
+                top: 20px;
+                right: 30px;
+                cursor: pointer;
             }
             .player1 {
                 left: 30px;
@@ -60,6 +71,7 @@
             S and W</p>
         <p class="player2">Player 2 controls:<br>
             Up and Down arrows</p>
+        <img src="images/expand.png" id="fullscreen">
         <script type="text/javascript" src="game.js"></script>
 	</body>
 </html>

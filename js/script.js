@@ -27,14 +27,16 @@ canvas.height = height;
 
 window.onload = function() {
     setupElements();
-    document.addEventListener("click",function() {
+    canvas.addEventListener("click",function() {
         if (!running) setup();
         if (firstGame) {
             for (var i = 0; i < 2; i++) document.getElementsByTagName("p")[i].style.opacity = 0;
             firstGame = false;
         }
     });
+    document.getElementById('fullscreen').addEventListener("click",toggleFullScreen);
     document.addEventListener("keydown",function(event) {
+        if (event.keyCode == 13) toggleFullScreen();
         if (event.keyCode == 38) UPPress = true;
         if (event.keyCode == 40) DOWNPress = true;
         if (event.keyCode == 83) sPress = true;
@@ -56,11 +58,30 @@ window.onload = function() {
     ctx.fillText("Click to play", width * 0.5 - 144, height * 0.5 + 6);
 };
 
-window.onresize = function() {
+window.onresize = resize;
+
+function resize() {
     width = window.innerWidth;
-    height = window.outerHeight;
+    height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
+    gameOver("resize");
+};
+
+function toggleFullScreen() {
+    if (!document.fullscreenElement &&    // alternative standard method
+        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+        if (canvas.requestFullscreen) canvas.requestFullscreen();
+        else if (canvas.msRequestFullscreen) canvas.msRequestFullscreen();
+        else if (canvas.mozRequestFullScreen) canvas.mozRequestFullScreen();
+        else if (canvas.webkitRequestFullscreen) canvas.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+    resize();
 };
 
 // Setup elements
@@ -112,6 +133,7 @@ function setup() {
     ball.vy = numbers[Math.floor(Math.random()*2)];
 
     running = true;
+    canvas.style.cursor = 'none';
 
     interval = setInterval(loop, 1000 / 60);
 };
@@ -228,6 +250,7 @@ function gameOver(player) { // Player = Player who wins
 
     running = false;
     clearInterval(interval);
+    canvas.style.cursor = 'default';
 
     // Reset ball position
     ball.x = width * 0.5;
@@ -238,20 +261,30 @@ function gameOver(player) { // Player = Player who wins
 
     setTimeout(function() {
         ctx.clearRect(0,0,width,height);
-        if (player == 1) {
-            score1 += 1;
-            ctx.fillStyle = "white";
-            ctx.font = "bold 100px Roboto";
-            ctx.fillText("Player 1 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
-        } else if (player == 2) {
-            score2 += 1;
-            ctx.fillStyle = "white";
-            ctx.font = "bold 100px Roboto";
-            ctx.fillText("Player 2 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
-        }
+        if (player !== "resize") {
+            if (player === 1) {
+                score1 += 1;
+                ctx.fillStyle = "white";
+                ctx.font = "bold 100px Roboto";
+                ctx.fillText("Player 1 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
+            } else if (player === 2) {
+                score2 += 1;
+                ctx.fillStyle = "white";
+                ctx.font = "bold 100px Roboto";
+                ctx.fillText("Player 2 wins", width * 0.5 - 247.5, height * 0.5 - 66.5);
+            }
 
-        ctx.fillStyle = "white";
-        ctx.font = "50px Roboto";
-        ctx.fillText("Click to play again", width * 0.5 - 214.5, height * 0.5 + 6);
+            ctx.fillStyle = "white";
+            ctx.font = "50px Roboto";
+            ctx.fillText("Click to play again", width * 0.5 - 214.5, height * 0.5 + 6);
+        } else if (player === "resize") {
+            ctx.fillStyle = "white";
+            ctx.font = "bold 100px Roboto";
+            ctx.fillText("Pong", width * 0.5 - 121.5, height * 0.5 - 66.5);
+
+            ctx.fillStyle = "white";
+            ctx.font = "50px Roboto";
+            ctx.fillText("Click to play", width * 0.5 - 144, height * 0.5 + 6);
+        }
     },50);
 };
