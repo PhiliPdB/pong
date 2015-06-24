@@ -211,7 +211,7 @@ function update() {
     // Bars
     for (var i = 0; i < bars.length; i++) {
         var bar = bars[i];
-
+        // Here is a bug...
         if ((ball.x - ball.radius ) < (bar.w + 10) && (ball.y - ball.radius) < (bar.h + bar.y) && (ball.y + ball.radius) > bar.y) {
             ball.x = 10 + bar.w + ball.radius;
             ball.vx = -ball.vx;
